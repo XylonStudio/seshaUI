@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Properties>
-    <AppName>seshaPlate</AppName>
+    <AppName>seshaUI</AppName>
     <AppVersion>1.0.0.0</AppVersion>
     <ConfigBuild>Debug</ConfigBuild>
     <ConfigCPU>x86</ConfigCPU>
@@ -8,6 +8,6 @@
     <ConfigENGINE>Subatomic (Next)</ConfigENGINE>
     <EnvironmentName>Xylon Studio</EnvironmentName>
     <EnvironmentVersion>0.2.14.4</EnvironmentVersion>
-    <String>windows.seshaplate.seshaplate</String>
+    <String>windows.xylonstudio.seshaUI</String>
     <Output>\bin\x86\Debug</Output>
 </Properties>
