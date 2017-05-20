@@ -1,0 +1,73 @@
+﻿var app = new seshaUI();
+
+func main() {
+    Menu.setApplicationMenu = Template.Menu;
+    Menu.BackgroundFromHTML = "#fff";
+    app.run();
+}
+
+
+#region App UI (View Controller)
+
+var Template = {
+    Menu : func() {`
+        <root>
+            <TopLevelMenu Name="mnuFile" Text="&amp;File">
+                <MenuItem Name="mnuFileExit" Text="Exit..." />
+            </TopLevelMenu>
+            <TopLevelMenu Name="mnuAPI" Text="Explore API's">
+                <MenuItem Name="mnuAPIstrInt" Text="String Interpolation" />
+                <MenuItem Name="mnuAPIhello" Text="Hello World" />
+                <MenuItem Name="mnuAPIfiles" Text="Get Files (images)" />
+                <MenuItem Name="mnuAPIwindow" Text="New Window" />
+            </TopLevelMenu>
+        </root>
+    `}.Code()
+};
+
+#endregion
+
+func application_onReady() {
+    app.onExit = "close();";
+}
+
+func close() {
+    app.destroy();
+}
+
+func mnuAPIstrInt_click() {
+    string name     = "Donald";
+    int age         = 19;
+    string language = "C Modulus";
+    
+    println "Hi, my name is {0}. I'm a {1} year old programmer. I love programming in {2}.".format(name, age, language);
+    var Results = MessageBox.Show("Hi, my name is {0}. I'm a {1} year old programmer. I love programming in {2}.".format(name, age, language), app.title, MessageButtons.OK, MessageIcon.Information);
+    if Results == MessageBoxResults.OK {
+        println "You clicked OK!";
+        MsgBox.Show("You clicked OK!");
+    }
+}
+
+func mnuAPIhello_click() {
+    var hello = document.createElement("h1");
+    var text = document.createTextNode("Hello World");
+    hello.appendChild(text);
+    document.body.appendChild(hello);
+}
+
+func mnuAPIfiles_click() {
+    var folders = new Directory(specialdirectory.mypictures);
+    var pngs    = folders.GetFiles(specialdirectory.mypictures, "*.png", false);
+    
+    pngs.forEach(func (image){
+        var img   = document.createElement("img");
+        img.src   = image;
+        img.style = "padding: 20px; width: 90px;";
+        document.body.appendChild(img);
+    });
+}
+
+func mnuAPIwindow_click() {
+    var form2 = new Form("HTMLFile2.html");
+    form2.Show();
+}

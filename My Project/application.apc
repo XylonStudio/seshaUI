@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+    <Executable>seshaPlate.exe</Executable>
+    <Startup ui="index" type="Local">\app\index.html</Startup>
+    <Identifier>windows.seshaplate.seshaplate</Identifier>
+</project>
