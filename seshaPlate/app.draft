@@ -1,11 +1,10 @@
-﻿var app = new seshaUI();
+var app = new seshaUI();
 
 func main() {
     Menu.setApplicationMenu = Template.Menu;
     Menu.BackgroundFromHTML = "#fff";
     app.run();
 }
-
 
 #region App UI (View Controller)
 
