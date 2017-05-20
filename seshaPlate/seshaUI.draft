@@ -1,16 +1,13 @@
 
 // Xylon Studio
 // 
-// seshaUI library for Exposed-C (Draft Programming Language)
+// seshaUI library for subatomicJS and C Modulus (Draft Programming Language)
 // Exposed-C library
 // 
 // Copyright (c) Donald Pakkies 2017
 //
 
 #region sesha Info
-//seshaUI 0.1
-//License: MIT
-//Author(s): Donald Pakkies
 
 func sesha () {
     if (typeof sesha.instance == "object") {
@@ -24,7 +21,7 @@ func sesha () {
     this._Framework  = "subatomicJs, sesha ToolKit";
     this._Author     = "Donald Pakkies";
     this._Maintainer = "Donald Pakkies";
-    this._Date       = "May 1, 2017, 4:18:04 PM";
+    this._Date       = "May 5, 2017, 3:24:04 PM";
     
     this.instance    = this;
     return this;
@@ -402,16 +399,12 @@ var Path = {
         var temp = sDirectory.returnFile.toString().split(",");
         return temp;
     }
-    //GetFiles : func (path, extension, search) {
-    //    return sDirectory.getFiles(path, extension, search);
-    //}
 };
 
 func Directory(path) {
     if path == null || "" {
         path = null;
     }
-    //this.name         = "sDirectory";
     this._Name        = "";
     this._FileName    = "";
     this._Directories = "";
@@ -480,7 +473,6 @@ func Directory(path) {
         var temp    = sDirectory.returnFile.toString().split(",");
         this._Files = temp;
         return temp;
-        //return sDirectory.getFiles(path, extension, search);
     }
     
     return this;
@@ -605,14 +597,6 @@ var system = {
             return output.writeln(text);
         }
     },
-    menu : func () {
-        this.text   = "";
-        this.event  = "";
-        this.enable = func() {
-            return println "menu enabled!";
-        }
-        return this;
-    }
 };
 
 //var Process =  {
@@ -736,8 +720,6 @@ func Form (url) {
     
     return this;
 }
-
-//HTMLFile2.html
 
 Object.__defineSetter__.call(Form.prototype, "URL", func (path) {
     this._url = path || "";
@@ -1021,39 +1003,22 @@ var string = {
     }
 }
 
-/*if !String.prototype.ins {
-    String.prototype.ins = func () {
-        var i;
-        var text = this;
-        
-        for i = 0; i < arguments.length; i++ {
-            text = text.replace("%", arguments[i]);
-        }
-        
-        return text;
-    }
-}*/
-
-if !String.prototype.format {
-    String.prototype.format = func () {
-        var text = this;
-        
+String.prototype.format = func () {
+    var text = this;
+    
         for var i = 0; i < arguments.length; i++ {
             text = text.replace("{" + i + "}", arguments[i]);
         }
-        
         return text;
     }
 }
 
-if !String.prototype.Format {
-    String.prototype.Format = func () {
-        var text = this;
-        
+String.prototype.Format = func () {
+    var text = this;
+    
         for var i = 0; i < arguments.length; i++ {
             text = text.replace("{" + i + "}", arguments[i]);
         }
-        
         return text;
     }
 }
