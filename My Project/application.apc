@@ -2,5 +2,5 @@
 <project>
     <Executable>seshaPlate.exe</Executable>
     <Startup ui="index" type="Local">\app\index.html</Startup>
-    <Identifier>windows.seshaplate.seshaplate</Identifier>
+    <Identifier>xylonstudio.subatomicjs.seshaUI</Identifier>
 </project>
