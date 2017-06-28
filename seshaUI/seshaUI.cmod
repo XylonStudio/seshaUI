@@ -1,0 +1,1172 @@
+(func () {
+    
+    #region sesha Info
+
+    func sesha () {
+        if (typeof sesha.instance == "object") {
+            return sesha.instance;
+        }
+        
+        this._Name       = "seshaUI";
+        this._Version    = 0.3;
+        this._License    = "MIT";
+        this._Language   = "C Modulus";
+        this._Framework  = "subatomicJS, preciseJS";
+        this._Author     = "Donald Pakkies";
+        this._Maintainer = "Donald Pakkies";
+        this._Date       = "Jun 18, 2017, 10:56 AM";
+        
+        this.instance    = this;
+        return this;
+    }
+
+    #endregion
+
+    #region Window Properties
+
+    var FormBorderStyle = {
+        get None() { 
+            return "None";
+        },
+        get Fixed3D() {
+            return "Fixed3D";
+        },
+        get FixedDialog() {
+            return "FixedDialog";
+        },
+        get FixedSingle() {
+            return "FixedSingle";
+        },
+        get FixedToolWindow() {
+            return "FixedToolWindow";
+        },
+        get Sizable() {
+            return "Sizable";
+        },
+        get SizableToolWindow() {
+            return "SizableToolWindow";
+        }
+    };
+
+    var StartPosition = {
+        get CenterToParent() {
+            return "CenterToParent";
+        },
+        get CenterToScreen() {
+            return "CenterToScreen";
+        },
+        get WindowsDefaultLocation() {
+            return "WindowsDefaultLocation";
+        }
+    };
+
+    var WindowState = {
+        get Maximized() {
+            return "Maximized";
+        },
+        get Minimized() {
+            return "Minimized";
+        },
+        get Normal() {
+            return "Normal";
+        }
+    };
+
+    #endregion
+
+    #region Dialogs
+
+    func BrowseDialog(name) {
+        if name == null || name == "" {
+            name = "browseDialog";
+        }
+        this.name                 = name;
+        this._Description         = null;
+        this._ShowNewFolderButton = false;
+        this._Results             = "";
+        this._Path                = "";
+        this.Show = func () {
+            browseDialog.description(this._Description);
+            browseDialog.showNewFolderButton(this._ShowNewFolderButton);
+            browseDialog.showDialog();
+            this._Results = browseDialog.results;
+            this._Path    = browseDialog.path;
+            return this._Results;
+        }
+        return this;
+    }
+
+    Object.__defineGetter__.call(BrowseDialog.prototype, "Description", func () {
+        return this._Description;
+    });
+
+    Object.__defineSetter__.call(BrowseDialog.prototype, "Description", func (desc) {
+        return this._Description = desc || null;
+    });
+
+    Object.__defineGetter__.call(BrowseDialog.prototype, "ShowNewFolderButton", func () {
+        return this._ShowNewFolderButton;
+    });
+
+    Object.__defineSetter__.call(BrowseDialog.prototype, "ShowNewFolderButton", func (show) {
+        return this._ShowNewFolderButton = show || false;
+    });
+
+    Object.__defineGetter__.call(BrowseDialog.prototype, "Results", func () {
+        return this._Results;
+    });
+
+    Object.__defineGetter__.call(BrowseDialog.prototype, "Path", func () {
+        return this._Path;
+    });
+
+    func OpenDialog(name) {
+        if name == null || "" {
+            name = "openDialog";
+        }
+        this.name      = name;
+        this._Title    = document.title;
+        this._Filter   = ".*";
+        this._Results  = "";
+        this._Path     = "";
+        this._FileName = "";
+        this.Show = func () {
+            openDialog.title(this._Title);
+            openDialog.showDialog(this._Filter);
+            this._Results  = openDialog.results;;
+            this._Path     = openDialog.path;
+            this._FileName = openDialog.filename;
+            return this._Results;
+        }
+        return this;
+    }
+
+    Object.__defineGetter__.call(OpenDialog.prototype, "Title", func () {
+        return this._Title;
+    });
+
+    Object.__defineSetter__.call(OpenDialog.prototype, "Title", func (dialogtitle) {
+        return this._Title = dialogtitle || document.title;
+    });
+
+    Object.__defineGetter__.call(OpenDialog.prototype, "Filter", func () {
+        return this._Filter;
+    });
+
+    Object.__defineSetter__.call(OpenDialog.prototype, "Filter", func (filters) {
+        return this._Filter = filters || ".*";
+    });
+
+    Object.__defineGetter__.call(OpenDialog.prototype, "Results", func () {
+        return this._Results;
+    });
+
+    Object.__defineGetter__.call(OpenDialog.prototype, "Path", func () {
+        return this._Path;
+    });
+
+    Object.__defineGetter__.call(OpenDialog.prototype, "FileName", func () {
+        return this._FileName;
+    });
+
+    func SaveDialog(name) {
+        if name == null || "" {
+            name = "saveDialog";
+        }
+        this.name      = name;
+        this._Title    = document.title;
+        this._Filter   = ".*";
+        this._Results  = "";
+        this._Path     = "";
+        this._FileName = "";
+        this.Show = func () {
+            saveDialog.title(this._Title);
+            saveDialog.filename(this._FileName);
+            saveDialog.showDialog(this._Filter);
+            this._Results  = saveDialog.results;;
+            this._Path     = saveDialog.path;
+            this._FileName = saveDialog.filename;
+            return this._Results;
+        }
+        return this;
+    }
+
+    Object.__defineGetter__.call(SaveDialog.prototype, "Title", func () {
+        return this._Title;
+    });
+
+    Object.__defineSetter__.call(SaveDialog.prototype, "Title", func (dialogtitle) {
+        return this._Title = dialogtitle || document.title;
+    });
+
+    Object.__defineGetter__.call(SaveDialog.prototype, "Filter", func () {
+        return this._Filter;
+    });
+
+    Object.__defineSetter__.call(SaveDialog.prototype, "Filter", func (filters) {
+        return this._Filter = filters || ".*";
+    });
+
+    Object.__defineGetter__.call(SaveDialog.prototype, "Results", func () {
+        return this._Results;
+    });
+
+    Object.__defineGetter__.call(SaveDialog.prototype, "Path", func () {
+        return this._Path;
+    });
+
+    Object.__defineGetter__.call(SaveDialog.prototype, "FileName", func () {
+        return this._FileName;
+    });
+
+    var DialogResults = {
+        get Abort() {
+            return "Abort";
+        },
+        get Retry() {
+            return "Retry";
+        },
+        get Ignore() {
+            return "Ignore";
+        },
+        get OK() {
+            return "OK";
+        },
+        get Cancel() {
+            return "Cancel";
+        },
+        get Yes() {
+            return "Yes";
+        },
+        get No() {
+            return "No";
+        }
+    };
+
+    #endregion
+
+    #region MessageBox
+
+    var MessageBox = {
+        name : "messagebox",
+        error : false,
+        Show : func (text, caption, buttons, icon) {
+            if text == null {
+                text = "null";
+            }
+            if caption == null {
+                caption = document.title;
+            }
+            if buttons == null {
+                buttons = "MessageButtons.OK";
+            }
+            if icon == null {
+                icon = "MessageIcon.None";
+            }
+            messagebox.show(text, caption, buttons, icon);
+            return messagebox.results;
+        }
+    };
+
+    var MsgBox = {
+        name : "msgbox",
+        Show : func (text, caption) {
+            if text == null {
+                text = "null";
+            }
+            if caption == null {
+                caption = document.title;
+            }
+            msgbox.show(text, caption);
+        }
+    };
+
+    var MessageIcon = {
+        get Asterisk() {
+            return "asterisk";
+        },
+        get Error() {
+            return "error";
+        },
+        get Exclamation() {
+            return "exclamation";
+        },
+        get Hand() { 
+            return "hand";
+        },
+        get Information() {
+            return "information";
+        },
+        get None() {
+            return "none";
+        },
+        get Question() {
+            return "question";
+        }
+    };
+
+    var MessageButtons = {
+        get AbortRetryIgnore () {
+            return "abortretryignore";
+        },
+        get OK() {
+            return "ok";
+        },
+        get OKCancel() {
+            return "okcancel";
+        },
+        get RetryCancel() {
+            return "retrycancel";
+        },
+        get YesNo() {
+            return "yesno";
+        },
+        get YesNoCancel() {
+            return "yesnocancel";
+        }
+    };
+
+    var MessageBoxResults = {
+        get Abort() {
+            return "abort";
+        },
+        get Retry() {
+            return "retry";
+        },
+        get Ignore() {
+            return "ignore";
+        },
+        get OK() {
+            return "ok";
+        },
+        get Cancel() {
+            return "cancel";
+        },
+        get Yes() {
+            return "yes";
+        },
+        get No() {
+            return "no";
+        }
+    };
+
+    #endregion
+
+    #region File System
+
+    var Path = {
+        name : "sDirectory",
+        Exists : func (directory) {
+            sDirectory.exists(directory);
+            return sDirectory.directoryExists;
+        },
+        CopyTo : func (path1, path2) {
+            return sDirectory.copyTo(path1, path2);
+        },
+        Create : func (directory) {
+            return sDirectory.create(directory);
+        },
+        GetDirectoryName: func (path) {
+            return sDirectory.getDirectoryName(path);
+        },
+        GetName : func (path) {
+            path      = path.ReplaceAll("/", "\\");
+            var first = path.substring(0, path.lastIndexOf("\\")); 
+            var name  = path.replace(first, "");
+            return name.replace("\\", "");
+        },
+        GetDirectories : func (path) {
+            sDirectory.getFolders(path);
+            var temp = sDirectory.returnFolder.toString().split(",");
+            return temp;
+        },
+        GetFileName : func (path) {
+            sDirectory.getFileName(path);
+            return sDirectory.returnName;
+        },
+        GetFiles : func (path, extension, search) {
+            if search == null || "" {
+                search = false;
+            }
+            sDirectory.getFilesFrom(path, extension, search);
+            var temp = sDirectory.returnFile.toString().split(",");
+            return temp;
+        }
+    };
+
+    func Directory(path) {
+        if path == null || "" {
+            path = null;
+        }
+        this._Name        = "";
+        this._FileName    = "";
+        this._Directories = "";
+        this._Files       = "";
+        this._Path        = path;
+        this.Exists = func (directory) {
+            if directory == null || "" {
+                directory = this._Path;
+            }
+            sDirectory.exists(directory);
+            return sDirectory.directoryExists;
+        }
+        
+        this.CopyTo = func (from, to) {
+            if from == null || "" {
+                from = this._Path;
+            }
+            return sDirectory.copyTo(from, to);
+        }
+        
+        this.Create = func (directory) {
+            if directory == null || "" {
+                directory = this._Path;
+            }
+            return sDirectory.create(directory);
+        }
+        
+        this.GetDirectories = func (path) {
+            if path == null || "" {
+                path = this._Path;
+            }
+            sDirectory.getFolders(path);
+            var temp          = sDirectory.returnFolder.toString().split(",");
+            this._Directories = temp;
+            return temp;
+        }
+        
+        this.GetName = func (path) {
+            if path == null || path == "" {
+                path = this._Path;
+            }
+            path       = path.ReplaceAll("/", "\\");
+            var first  = path.substring(0, path.lastIndexOf("\\")); 
+            var name   = path.replace(first, "");
+            this._Name = name.replace("\\", "");;
+            return name.replace("\\", "");
+        }
+        
+        this.GetFileName = func (path) {
+            if path == null || path == "" {
+                path = this._Path;
+            }
+            sDirectory.getFileName(path);
+            this._FileName = sDirectory.getFileName(path);
+            return sDirectory.returnName;
+        }
+        
+        this.GetFiles = func (path, extension, search) {
+            if path == null || path ==  "" {
+                path = this._Path;
+            }
+            if search == null || path == "" {
+                search = false;
+            }
+            sDirectory.getFilesFrom(path, extension, search);
+            var temp    = sDirectory.returnFile.toString().split(",");
+            this._Files = temp;
+            return temp;
+        }
+        
+        return this;
+    }
+
+    Object.__defineGetter__.call(Directory.prototype, "Path", func () {
+        return this._Path;
+    });
+
+    Object.__defineSetter__.call(Directory.prototype, "Path", func (dir) {
+        return this._Path = dir || null;
+    });
+
+    Object.__defineGetter__.call(Directory.prototype, "FileName", func () {
+        return this._FileName;
+    });
+
+    Object.__defineGetter__.call(Directory.prototype, "Name", func (path) {
+        if path == null || "" {
+            path = this._Path;
+        }
+        path       = path.ReplaceAll("/", "\\");
+        var first  = path.substring(0, path.lastIndexOf("\\")); 
+        var name   = path.replace(first, "");
+        this._Name = name.replace("\\", "");;
+        return name.replace("\\", "");
+    });
+
+    Object.__defineGetter__.call(Directory.prototype, "Directories", func () {
+        return this._Directories;
+    });
+
+    Object.__defineGetter__.call(Directory.prototype, "Files", func () {
+        return this._Files;
+    });
+
+    var File = {
+        name : "file",
+        Exists : func (path) {
+            file.exists(path);
+            return file.fileExists;
+        },
+        Read : func (path) {
+            file.read(path);
+            return file.results;
+        },
+        Write : func (path, text) {
+            return file.write(path, text);
+        },
+        Name : func (path) {
+            file.getName(path);
+            return file.name;
+        }
+    }; 
+
+    #endregion
+
+    #region System
+
+    var Xml = {
+        name : "xmlreader",
+        Load : func (path) {
+            xmlreader.loadxml(path);
+        },
+        InnerText : func (SingleNodeValue, RootNode) {
+            xmlreader.innertext(SingleNodeValue, RootNode);
+            return xmlreader.innertextResults;
+        },
+        InnerTextAttribute : func (SingleNodeValue, RootNode, Attribute) {
+            xmlreader.innertextAttribute(SingleNodeValue, RootNode, Attribute);
+            return xmlreader.innertextAttributeResults;
+        }
+    };
+
+    var DateTime = {
+        name : "datetime",
+        get Hour() {
+            return datetime.hour;
+        },
+        get Minute() {
+            return datetime.minute;
+        },
+        get Second() {
+            return datetime.second;
+        },
+        get MilliSecond() {
+            return datetime.milliSecond;
+        },
+        get Year() {
+            return datetime.year;
+        },
+        get Month() {
+            return datetime.month;
+        },
+        get Day() {
+            return datetime.day;
+        },
+        get Date() {
+            return datetime.date;
+        },
+        get TimeOfDay() {
+            return datetime.timeOfDay;
+        },
+        get DayOfWeek() {
+            return datetime.dayOfWeek;
+        },
+        get DayOfYear() {
+            return datetime.dayOfYear;
+        }
+    };
+
+    var system = {
+        name : "system",
+        text : "",
+        event : "",
+        print : func (text) {
+            if text == null {
+                println "";
+            }
+            else {
+                text = text.toString();
+                if !text.endsWith(".include();") || !text.endsWith(".Include();") || !text.startsWith("string.Include(") {
+                    try {
+                        text = text.include();
+                    }
+                    catch exception {}
+                }
+                return println text;
+            }
+        }
+    };
+
+    func Process(name) {
+        if name == null || "" {
+            name = "newProcess";
+        }
+        this.name       = name;
+        this._ID        = "";
+        this._FileName  = "";
+        this._Arguments = "";
+        this.Close = func(id) {
+            if id == null || "" {
+                id = this._ID;
+            }
+            newProcess.close(id);
+        }
+        this.Kill = func(id) {
+            if id == null || "" {
+                id = this._ID;
+            }
+            newProcess.kill(id);
+        }
+        this.Refresh = func(id) {
+            if id == null || "" {
+                id = this._ID;
+            }
+            newProcess.refresh(id);
+        }
+        this.Start = func() {
+            newProcess.start(this._FileName, this._Arguments);
+            this._ID = newProcess.id;
+        }
+        return this;
+    }
+
+    Object.__defineSetter__.call(Process.prototype, "ID", func (id) {
+        this._ID = id || "";
+    });
+
+    Object.__defineGetter__.call(Process.prototype, "ID", func () {
+        return this._ID;
+    });
+
+    Object.__defineSetter__.call(Process.prototype, "Arguments", func (args) {
+        this._Arguments = args || "";
+    });
+
+    Object.__defineSetter__.call(Process.prototype, "FileName", func (path) {
+        this._FileName = path || "";
+    });
+
+    Object.__defineGetter__.call(Process.prototype, "Arguments", func () {
+        return this._Arguments;
+    });
+
+    Object.__defineGetter__.call(Process.prototype, "FileName", func () {
+        return this._FileName;
+    });
+
+    var Menu = {
+        set BackgroundFromName(name) {
+            mainMenu.backgroundColor(name);
+        },
+        set BackgroundFromHTML(code) {
+            mainMenu.backgroundCode(code);
+        },
+        set ForeColorFromName(name) {
+            mainMenu.labelColor(name);
+        },
+        set ForeColorFromHTML(code) {
+            mainMenu.labelCode(code);
+        },
+        set setApplicationMenu(code) {
+            mainMenu.show(code);
+        },
+        set Visible(vis) {
+            mainMenu.visible(vis);
+        }
+    };
+
+    #endregion
+
+    #region Main
+
+    var FormType = {
+        Local: "Local",
+        External: "External"
+    };
+
+    func Form (url) {
+        this.name   = "newWindow";
+        this._url   = url;
+        this._type  = "Local";
+        this._owned = false;
+        
+        this.Show = func () {
+            return application.newWindow(this._url, this._type, null, this._owned);
+        }
+        
+        this.ShowDialog = func () {
+            return application.newWindow(this._url, this._type, null, this._owned);
+        }
+        
+        return this;
+    }
+
+    Object.__defineSetter__.call(Form.prototype, "URL", func (path) {
+        this._url = path || "";
+    });
+
+    Object.__defineSetter__.call(Form.prototype, "Type", func (ty) {
+        this._type = ty || "Local";
+    });
+
+    Object.__defineSetter__.call(Form.prototype, "Owned", func (ow) {
+        this._owned = ow || true;
+    });
+
+    Object.__defineGetter__.call(Form.prototype, "URL", func () {
+        return this._url;
+    });
+
+    Object.__defineGetter__.call(Form.prototype, "Type", func () {
+        return this._type;
+    });
+
+    Object.__defineGetter__.call(Form.prototype, "Owned", func () {
+        return this._owned;
+    });
+
+    func seshaUI() {
+        if (typeof seshaUI.instance == "object") {
+            return seshaUI.instance;
+        }
+        
+        this.run = func () {
+            return application.run();
+        }
+        
+        this.restart = func () {
+            return application.restart();
+        }
+        
+        this.destroy = func () {
+            return application.destroy();
+        }
+        
+        this.exit = func () {
+            return application.exit();
+        }
+        
+        this.singleinstance = func () {
+            return application.singleinstance();
+        }
+
+        this.require = func (url) {
+            try {
+                var head = document.getElementsByTagName("head")[0];
+                var script = document.createElement("script");
+                if url.endsWith(".cmod") {
+                    script.src = url.replace(".cmod", ".js");
+                }
+                else {
+                    script.src = url;
+                }
+                script.type = "text/javascript";
+                head.appendChild(script);
+                return true;
+            }
+            catch exception {
+                return false;
+            }
+        }
+        
+        this.name            = "SeshaUI";
+        this.title           = "sesha App";
+        this.controlbox      = true;
+        this.formborderstyle = null;
+        this.icon            = null;
+        this.maximizebox     = true;
+        this.minimizebox     = true;
+        this.onExit          = "";
+        this.showicon        = true;
+        this.height          = 300;
+        this.width           = 300;
+        this.windowstate     = null;
+        this.startposition   = null;
+        this.topmost         = false;
+        
+        this.add = func (code) {
+            code = code.toString();
+            if !code.endsWith("br>") {
+                return document.write(code + "<br>");
+            }
+            else {
+                return document.write(code);
+            }
+        }
+
+        this.addElement = func (code) {
+            var mainView = document.getElementById("ViewController");
+            return mainView.insertAdjacentHTML('beforeend', code);
+        }
+        
+        this.AddTo = func (elementID, code) {
+            var docElement = document.getElementById(elementID);
+            return docElement.insertAdjacentHTML('beforeend', code);
+        }
+        
+        this.ViewController = func (code) {
+            var temp = code;
+            var docElement = document.getElementById("ViewController");
+            return docElement.insertAdjacentHTML('beforeend', code);
+        }
+        
+        this.Menu = func (code) {
+            mainMenu.show(code);
+        }
+        
+        this.select = func () {
+            var selector = arguments[0];
+            var item     = arguments[0].substr(1);
+            var num      = arguments[1];
+            if selector.startsWith("#") {
+                return document.getElementById(item);
+            }
+            else if selector.startsWith(".") {
+                return document.getElementsByClassName(item);
+            }
+            else {
+                return document.getElementsByName(selector);
+            }
+        }
+        
+        this.getElementID = func (elementID) {
+            var docElement = document.getElementById(elementID);
+            return docElement;
+        }
+        
+        this.getElementName = func (elementName) {
+            var docElement = document.getElementByName(elementName);
+            return docElement;
+        }
+        
+        this.activate = func () {
+            this.topmost = true;
+            this.topmost = false;
+        }
+        
+        seshaUI.instance = this;
+        return this;
+    }
+    #endregion
+
+    #region Getters and Setters
+
+    //Title
+    Object.__defineGetter__.call(seshaUI.prototype, "title", func () {
+        return document.title;
+    });
+
+    Object.__defineSetter__.call(seshaUI.prototype, "title", func (text) {
+        return document.title = text;
+    });
+
+    //Window
+    Object.__defineSetter__.call(seshaUI.prototype, "onExit", func (code) {
+        return application.onExit(code);
+        this.onExit = code || "";
+    });
+
+    Object.__defineSetter__.call(seshaUI.prototype, "formborderstyle", func (style) {
+        return application.formborderstyle(style);
+        this.formborderstyle = style || null;
+    });
+
+    Object.__defineSetter__.call(seshaUI.prototype, "controlbox", func (vis) {
+        return application.controlbox(vis);
+        this.controlbox = vis || true;
+    });
+
+    Object.__defineSetter__.call(seshaUI.prototype, "maximizebox", func (vis) {
+        return application.maximizebox(vis);
+        this.maximizebox = vis || true;
+    });
+
+    Object.__defineSetter__.call(seshaUI.prototype, "minimizebox", func (vis) {
+        return application.minimizebox(vis);
+        this.minimizebox = vis || true;
+    });
+
+    Object.__defineSetter__.call(seshaUI.prototype, "icon", func (path) {
+        return application.icon(path);
+        this.icon = path|| null;
+    });
+
+    Object.__defineSetter__.call(seshaUI.prototype, "showicon", func (vis) {
+        return application.showicon(vis);
+        this.showicon = vis|| true;
+    });
+
+    Object.__defineGetter__.call(seshaUI.prototype, "_height", func () {
+        return this.height;
+    });
+
+    Object.__defineSetter__.call(seshaUI.prototype, "height", func (h) {
+        return application.height(h);
+        this.height = h || 0;
+    });
+
+    Object.__defineGetter__.call(seshaUI.prototype, "_width", func () {
+        return this.width;
+    });
+
+    Object.__defineSetter__.call(seshaUI.prototype, "width", func (w) {
+        return application.width(w);
+        this.width = w || 0;
+    });
+
+    Object.__defineSetter__.call(seshaUI.prototype, "windowstate", func (state) {
+        return application.windowstate(state);
+        this.windowstate = state || null;
+    });
+
+    Object.__defineSetter__.call(seshaUI.prototype, "startposition", func (position) {
+        return application.startposition(position);
+        this.startposition = position || null;
+    });
+
+    Object.__defineSetter__.call(seshaUI.prototype, "topmost", func (vis) {
+        return application.topmost(vis);
+        this.topmost = vis|| false;
+    });
+
+    //sesha Info
+    Object.__defineGetter__.call(sesha.prototype, "Name", func () {
+        return this._Name;
+    });
+
+    Object.__defineGetter__.call(sesha.prototype, "Version", func () {
+        return this._Version;
+    });
+
+    Object.__defineGetter__.call(sesha.prototype, "License", func () {
+        return this._License;
+    });
+
+    Object.__defineGetter__.call(sesha.prototype, "Language", func () {
+        return this._Language;
+    });
+
+    Object.__defineGetter__.call(sesha.prototype, "Framework", func () {
+        return this._Framework;
+    });
+
+    Object.__defineGetter__.call(sesha.prototype, "Author", func () {
+        return this._Author;
+    });
+
+    Object.__defineGetter__.call(sesha.prototype, "Maintainer", func () {
+        return this._Maintainer;
+    });
+
+    Object.__defineGetter__.call(sesha.prototype, "Date", func () {
+        return this._Date;
+    });
+
+    Object.__defineGetter__.call(sesha.prototype, "Info", func () {
+        return "Name: " + this._Name + "\nVersion: " + this._Version + "\nLicense: " + this._License + "\nLanguage: " + this._Language + "\nFramework: " + this._Framework + "\nAuthor: " + this._Author + "\nMaintainer: " + this._Maintainer + "\nDate: " + this._Date;
+    });
+
+    Object.__defineGetter__.call(sesha.prototype, "toString", func () {
+        return this._Name + ", " + this._Version + ", " + this._License + ", " + this._Language + ", " + this._Framework + ", " + this._Author + ", " + this._Maintainer + ", " + this._Date;
+    });
+
+    #endregion
+    
+    #region Prototypes and more
+    
+    var int = {
+        
+        Parse : func () {
+            string text = arguments[0];
+            return Number(text);
+        }
+        
+    }
+    
+    var string = {
+        
+        Format : func () {
+            
+            string text = arguments[0];
+
+            for var i = 0; i < arguments.length; i++ {
+                arguments[i] = arguments[i+1];
+            }
+
+            for var i = 0; i < arguments.length; i++ {
+                if arguments[i] != "undifined" {
+                    text = text.replace("{" + i + "}", arguments[i]);
+                }
+            }
+            
+            return text;
+        },
+        Include : func () {
+            string text = arguments[0];
+            
+            var results = text.match(/{(.*?)\}/g).map(func (val) {
+                var newVal = val.Between("{", "}");
+                text       = text.replace(val, eval(newVal));
+            });
+                
+            return text;
+        }
+    }
+    
+    String.prototype.format = func () {
+        string text = this;
+        
+        for var i = 0; i < arguments.length; i++ {
+            text = text.replace("{" + i + "}", arguments[i]);
+        }
+        
+        return text;
+    }
+
+    String.prototype.Format = func () {
+        string text = this;
+        
+        for var i = 0; i < arguments.length; i++ {
+            text = text.replace("{" + i + "}", arguments[i]);
+        }
+        
+        return text;
+    }
+
+    String.prototype.include = func () {
+        string text = this;
+        var results = text.match(/{(.*?)\}/g).map(func (val) {
+            var newVal = val.ReplaceAll("{", "");
+            newVal     = newVal.ReplaceAll("}", "");
+            text       = text.replace(val, "" + eval(newVal) + "");
+        });
+        return text;
+    }
+
+    String.prototype.Include = func () {
+        string text = this;
+        var results = text.match(/{(.*?)\}/g).map(func (val) {
+            var newVal = val.Between("{", "}");
+            text       = text.replace(val, eval(newVal));
+        });
+        return text;
+    }
+
+    String.prototype.Parse = func () {
+        string text = this;
+        return Number(text);
+    }
+    
+    String.prototype.parse = func () {
+        string text = this;
+        return Number(text);
+    }
+    
+    String.prototype.Between = func (char1, char2) {
+        string text = this;
+        return text.substring(text.lastIndexOf(char1) + 1, text.lastIndexOf(char2));
+    }
+
+    String.prototype.ReplaceAll = func (search, replacement) {
+        string text = this;
+        return text.split(search).join(replacement);
+    };
+
+    String.prototype.ToString = func () {
+        return this.toString();
+    }
+    
+    String.prototype.toInt = func () {
+        return Number(this);
+    }
+    
+    String.prototype.ToInt = func () {
+        return Number(this);
+    }
+
+    Array.prototype.Contains = func(elem) {
+        for var i in this {
+            if this[i] == elem {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    Number.prototype.ToString = func () {
+        return this.toString();
+    }
+
+    Boolean.prototype.ToString = func () {
+        return this.toString();
+    }
+
+    Function.prototype.ToString = func () {
+        return this.toString();
+    }
+
+    Function.prototype.Code = func (args) {
+        if args == null || "" {
+            args = 2;
+        }
+        var code = this.toString();
+        return code.slice(15, -args);
+    };
+
+    sesha.prototype.ToString = func () {
+        var target = this;
+        return target.toString;
+    };
+    
+    #endregion
+    
+    window.sesha        = sesha;
+    window.BrowseDialog = BrowseDialog;
+    window.OpenDialog   = OpenDialog;
+    window.SaveDialog   = SaveDialog;
+    window.Directory    = Directory;
+    window.Process      = Process;
+    window.Form         = Form;
+    window.seshaUI      = seshaUI;
+    
+    window.FormBorderStyle   = FormBorderStyle;
+    window.StartPosition     = StartPosition;
+    window.WindowState       = WindowState;
+    window.DialogResults     = DialogResults;
+    window.MessageBox        = MessageBox;
+    window.MsgBox            = MsgBox;
+    window.MessageIcon       = MessageIcon;
+    window.MessageButtons    = MessageButtons;
+    window.MessageBoxResults = MessageBoxResults;
+    window.Path              = Path;
+    window.File              = File;
+    window.Xml               = Xml;
+    window.DateTime          = DateTime;
+    window.system            = system;
+    window.Menu              = Menu;
+    window.FormType          = FormType;
+    window.string            = string;
+    window.int               = int;
+    window.onload = func () {
+        var apc = specialdirectory.currentdirectory + "/application.apc";
+        if File.Exists(apc) == true {
+            xmlreader.loadxml(apc);
+            xmlreader.innertext('Identifier', '/project');
+            var appid     = xmlreader.innertextResults;
+            var arguments = specialdirectory.applicationdata + "/wavel/{0}/args".format(appid);
+            if File.Exists(arguments) == true {
+                var args = File.Read(arguments);
+                file.delete(arguments);
+                main(args);
+            }
+            else {
+                main();
+            }
+        }
+        else {
+            main();
+        }
+    };
+    
+})();
