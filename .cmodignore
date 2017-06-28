@@ -1,1 +1,4 @@
 # .cmodignore
+
+string            = string;
+int               = int;
