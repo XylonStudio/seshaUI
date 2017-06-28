@@ -5,9 +5,9 @@
     <ConfigBuild>Debug</ConfigBuild>
     <ConfigCPU>x86</ConfigCPU>
     <ConfigFRAMEWORK>.NET Framework 4.6</ConfigFRAMEWORK>
-    <ConfigENGINE>Subatomic (Next)</ConfigENGINE>
+    <ConfigENGINE>Subatomic</ConfigENGINE>
     <EnvironmentName>Xylon Studio</EnvironmentName>
-    <EnvironmentVersion>0.2.14.4</EnvironmentVersion>
-    <String>windows.xylonstudio.seshaUI</String>
+    <EnvironmentVersion>0.2.15.1</EnvironmentVersion>
+    <String>xylonstudio.subatomicjs.seshaUI</String>
     <Output>\bin\x86\Debug</Output>
 </Properties>
